@@ -24,7 +24,7 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 const queries = ['bucin', 'galau', 'kehidupan', 'random'];
 
 // Menjalankan perintah /quote otomatis setiap hari pukul 11:52
-cron.schedule('52 11 * * *', async () => {
+cron.schedule('55 13 * * *', async () => {
     const channelId = '@katanyanala'; // Ganti dengan @username atau ID channel yang sesuai
 
     for (let i = 0; i < 5; i++) {
