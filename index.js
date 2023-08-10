@@ -21,7 +21,7 @@ const bot = new TelegramBot(botToken, { polling: true });
 
 const queries = ['bucin', 'galau', 'kehidupan', 'random'];
 
-cron.schedule('10 16 * * *', async () => {
+cron.schedule('21 16 * * *', async () => {
     const channelId = '@katanyanala';
 
     for (let i = 0; i < 5; i++) {
