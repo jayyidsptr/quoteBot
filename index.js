@@ -24,7 +24,7 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 const queries = ['bucin', 'galau', 'kehidupan', 'random'];
 
 // Menjalankan perintah /quote otomatis setiap hari pukul 11:52
-cron.schedule('16 14 * * *', async () => {
+cron.schedule('23 14 * * *', async () => {
     const channelId = '@katanyanala'; // Ganti dengan @username atau ID channel yang sesuai
 
     for (let i = 0; i < 5; i++) {
@@ -38,4 +38,10 @@ cron.schedule('16 14 * * *', async () => {
 }, {
     scheduled: true,
     timezone: "Asia/Makassar" // Ganti dengan zona waktu yang sesuai
+});
+
+// Menambahkan perintah /cek untuk mengecek apakah bot aktif
+bot.onText(/\/cek/, (msg) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, 'Bot is active and running!');
 });
