@@ -3,14 +3,11 @@ const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
 const quoteAPI = require('quote-indo');
 const cron = require('node-cron');
-require('dotenv').config();
 
 const app = express();
 
-// Port yang akan digunakan oleh Express
 const port = process.env.PORT || 3000;
 
-// Menentukan direktori tempat file index.html berada
 const publicDir = path.join(__dirname, 'public');
 
 app.use(express.static(publicDir));
@@ -19,13 +16,13 @@ app.listen(port, () => {
     console.log(`Express server is listening on port ${port}`);
 });
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const botToken = '6289347145:AAH5L5MGOmmEYu8SwznLs8VyyWd-D_DR8Uc'; // Ganti dengan token bot Anda
+const bot = new TelegramBot(botToken, { polling: true });
 
 const queries = ['bucin', 'galau', 'kehidupan', 'random'];
 
-// Menjalankan perintah /quote otomatis setiap hari pukul 11:52
 cron.schedule('28 14 * * *', async () => {
-    const channelId = '@katanyanala'; // Ganti dengan @username atau ID channel yang sesuai
+    const channelId = '@katanyanala';
 
     for (let i = 0; i < 5; i++) {
         const title = '<b>Quote of today</b>\n\n';
@@ -37,10 +34,9 @@ cron.schedule('28 14 * * *', async () => {
     }
 }, {
     scheduled: true,
-    timezone: "Asia/Makassar" // Ganti dengan zona waktu yang sesuai
+    timezone: "Asia/Makassar"
 });
 
-// Menambahkan perintah /cek untuk mengecek apakah bot aktif
 bot.onText(/\/cek/, (msg) => {
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, 'Bot is active and running!');
